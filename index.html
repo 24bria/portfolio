@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BRIANA — Discography</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;0,6..96,900;1,6..96,500&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#0b0b0d;
+    --graphite:#161519;
+    --sleeve:#1c1a1f;
+    --bone:#ede8de;
+    --bone-dim:#c9c3b6;
+    --chrome:#9aa0a8;
+    --crimson:#a8192e;
+    --crimson-bright:#d4213c;
+    --display: 'Bodoni Moda', serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+    --ease: cubic-bezier(.16,.8,.24,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--void);color:var(--bone);font-family:var(--body);overflow-x:hidden;}
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--crimson);color:var(--bone);}
+  :focus-visible{outline:2px solid var(--crimson-bright);outline-offset:3px;}
+
+  .eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--chrome);}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:1.4rem clamp(1.2rem,4vw,3rem);
+    background:rgba(11,11,13,.65);backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(154,160,168,.15);
+  }
+  .wordmark{display:flex;align-items:center;gap:.6rem;font-family:var(--display);font-weight:700;font-size:1.2rem;}
+  .wordmark .disc{
+    width:24px;height:24px;border-radius:50%;
+    background:repeating-radial-gradient(circle at center, #2b2a2f 0 1.5px, #17161a 1.5px 3px);
+    border:1px solid rgba(154,160,168,.35);position:relative;flex:0 0 auto;
+  }
+  .wordmark .disc::after{content:"";position:absolute;inset:38%;background:var(--crimson-bright);border-radius:50%;}
+  .nav-links{display:flex;gap:2.4rem;}
+  .nav-links a{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bone-dim);transition:color .3s var(--ease);}
+  .nav-links a:hover{color:var(--bone);}
+  .nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:.4rem;}
+  .nav-toggle span{width:22px;height:2px;background:var(--bone);}
+
+  @media (max-width:760px){
+    .nav-links{
+      position:fixed;inset:0 0 0 28%;background:var(--graphite);
+      flex-direction:column;justify-content:center;gap:2rem;padding:2rem;
+      transform:translateX(100%);transition:transform .5s var(--ease);
+      border-left:1px solid rgba(154,160,168,.2);
+    }
+    .nav-links.open{transform:translateX(0);}
+    .nav-links a{font-size:1rem;}
+    .nav-toggle{display:flex;}
+  }
+
+  /* ---------- HERO / TURNTABLE ---------- */
+  .hero{
+    position:relative;min-height:100svh;display:flex;align-items:center;
+    padding:6rem clamp(1.2rem,6vw,4rem) 3rem;
+    background:radial-gradient(900px circle at 80% 30%, rgba(168,25,46,.14), transparent 60%), var(--void);
+    border-bottom:1px solid rgba(154,160,168,.15);
+    gap:clamp(2rem,6vw,5rem);
+  }
+  .hero-text{flex:1 1 420px;max-width:34rem;}
+  .hero-eyebrow{margin-bottom:1.4rem;}
+  .hero-title{
+    font-family:var(--display);font-weight:900;
+    font-size:clamp(3.2rem,10vw,6.2rem);line-height:.92;letter-spacing:-.01em;
+  }
+  .hero-title em{font-style:italic;font-weight:500;color:var(--crimson-bright);}
+  .hero-sub{margin-top:1.6rem;font-size:clamp(1rem,1.5vw,1.15rem);font-weight:300;color:var(--bone-dim);line-height:1.65;}
+  .hero-tags{margin-top:2.2rem;display:flex;gap:.6rem;flex-wrap:wrap;}
+  .hero-tags span{font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;border:1px solid rgba(154,160,168,.3);padding:.4rem .75rem;color:var(--bone-dim);}
+
+  .turntable{flex:1 1 320px;display:flex;justify-content:center;align-items:center;position:relative;min-height:340px;}
+  .platter{
+    width:clamp(220px,32vw,340px);aspect-ratio:1;border-radius:50%;position:relative;
+    background:
+      repeating-radial-gradient(circle at center, #1c1a1f 0 2px, #121114 2px 4px);
+    box-shadow:0 30px 60px rgba(0,0,0,.55), inset 0 0 0 1px rgba(154,160,168,.15);
+    animation:spin 9s linear infinite;
+  }
+  .platter .label{
+    position:absolute;inset:34%;border-radius:50%;
+    background:var(--crimson);display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;box-shadow:0 0 0 1px rgba(0,0,0,.3), inset 0 0 20px rgba(0,0,0,.25);
+  }
+  .platter .label span{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;color:var(--bone);}
+  .platter .label strong{font-family:var(--display);font-size:1rem;color:var(--bone);margin:.15rem 0;}
+  .platter .spindle{position:absolute;inset:48%;background:var(--bone);border-radius:50%;}
+  .tonearm{
+    position:absolute;top:6%;right:2%;width:38%;height:2px;background:var(--chrome);
+    transform-origin:right center;transform:rotate(-28deg);
+  }
+  .tonearm::before{content:"";position:absolute;right:-10px;top:-9px;width:20px;height:20px;border-radius:50%;background:var(--graphite);border:2px solid var(--chrome);}
+  .tonearm::after{content:"";position:absolute;left:-4px;top:-4px;width:10px;height:10px;border-radius:2px;background:var(--chrome);}
+
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  .scroll-cue{
+    position:absolute;bottom:2rem;left:clamp(1.2rem,6vw,4rem);
+    font-family:var(--mono);font-size:.7rem;color:var(--chrome);
+    display:flex;align-items:center;gap:.6rem;letter-spacing:.14em;
+  }
+  .scroll-cue::after{content:"";width:1px;height:34px;background:linear-gradient(var(--chrome),transparent);}
+
+  /* ---------- LINER NOTES (about) ---------- */
+  .statement{padding:6rem clamp(1.2rem,6vw,4rem);background:var(--bone);color:var(--void);border-bottom:1px solid rgba(11,11,13,.1);}
+  .statement-inner{max-width:52rem;margin:0 auto;}
+  .statement .eyebrow{color:var(--crimson);margin-bottom:1.4rem;}
+  .statement p{font-family:var(--display);font-size:clamp(1.4rem,2.8vw,2.1rem);font-weight:500;line-height:1.35;}
+  .statement p + p{margin-top:1.4rem;font-family:var(--body);font-size:1.02rem;font-weight:300;color:#3a3833;line-height:1.7;}
+
+  /* ---------- DISCOGRAPHY ---------- */
+  .discog{padding:6rem clamp(1.2rem,6vw,4rem);background:var(--void);}
+  .section-head{margin-bottom:3rem;}
+  .section-head h2{font-family:var(--display);font-weight:700;font-size:clamp(1.8rem,3vw,2.6rem);margin-top:.6rem;}
+
+  .lp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2.4rem;}
+  @media (max-width:820px){.lp-grid{grid-template-columns:1fr;}}
+
+  .lp{
+    position:relative;background:var(--sleeve);border:1px solid rgba(154,160,168,.18);
+    padding:1.6rem;overflow:hidden;
+    opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease), transform .8s var(--ease);
+  }
+  .lp.in-view{opacity:1;transform:none;}
+  .lp-top{display:flex;gap:1.4rem;align-items:flex-start;}
+  .cover{
+    flex:0 0 auto;width:120px;height:120px;position:relative;
+    background:linear-gradient(155deg, var(--c1,#3a1218), var(--c2,#0b0b0d));
+    border:1px solid rgba(0,0,0,.4);
+  }
+  .cover::after{content:attr(data-cat);position:absolute;bottom:.4rem;left:.5rem;font-family:var(--mono);font-size:.6rem;color:rgba(237,232,222,.5);letter-spacing:.06em;}
+  .vinyl-peek{
+    position:absolute;top:8px;left:12px;width:120px;height:120px;border-radius:50%;
+    background:repeating-radial-gradient(circle at center, #1c1a1f 0 1.5px, #121114 1.5px 3px);
+    box-shadow:0 10px 24px rgba(0,0,0,.5);
+    transform:translateX(0);transition:transform .5s var(--ease), rotate 6s linear;
+    z-index:-1;
+  }
+  .lp:hover .vinyl-peek, .lp.tapped .vinyl-peek{transform:translateX(-42px) rotate(45deg);}
+  .vinyl-peek::before{content:"";position:absolute;inset:40%;background:var(--crimson);border-radius:50%;}
+
+  .lp-info{flex:1 1 auto;padding-top:.2rem;}
+  .plate-no{font-family:var(--mono);font-size:.68rem;color:var(--crimson-bright);letter-spacing:.18em;margin-bottom:.5rem;}
+  .lp-title{font-family:var(--display);font-weight:700;font-size:1.5rem;line-height:1.1;margin-bottom:.3rem;}
+  .lp-role{font-family:var(--mono);font-size:.72rem;color:var(--chrome);text-transform:uppercase;letter-spacing:.05em;}
+
+  .lp-desc{margin-top:1.2rem;font-weight:300;color:var(--bone-dim);line-height:1.7;font-size:.94rem;}
+
+  .tracklist{margin-top:1.6rem;border-top:1px solid rgba(154,160,168,.18);padding-top:1.2rem;
+    display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;}
+  .side{}
+  .side-label{font-family:var(--mono);font-size:.65rem;letter-spacing:.14em;color:var(--chrome);margin-bottom:.5rem;}
+  .side ol{list-style:none;}
+  .side li{
+    font-family:var(--mono);font-size:.78rem;color:var(--bone-dim);
+    display:flex;gap:.5rem;padding:.35rem 0;border-bottom:1px dashed rgba(154,160,168,.15);
+  }
+  .side li b{color:var(--crimson-bright);font-weight:500;}
+  @media (max-width:480px){.tracklist{grid-template-columns:1fr;}}
+
+  /* ---------- SINGLES (crate) ---------- */
+  .singles{padding:2rem 0 7rem;background:var(--void);}
+  .rail{display:flex;gap:1.2rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:.4rem clamp(1.2rem,6vw,4rem) 1.6rem;scrollbar-width:thin;scrollbar-color:var(--chrome) transparent;}
+  .rail::-webkit-scrollbar{height:5px;}
+  .rail::-webkit-scrollbar-thumb{background:var(--chrome);}
+  .single{
+    scroll-snap-align:start;flex:0 0 200px;background:var(--sleeve);
+    border:1px solid rgba(154,160,168,.18);padding:1.1rem;
+    transition:border-color .3s var(--ease), transform .3s var(--ease);
+  }
+  .single:hover{border-color:var(--crimson-bright);transform:translateY(-4px);}
+  .single-cover{width:100%;aspect-ratio:1;margin-bottom:1rem;background:linear-gradient(155deg, var(--c1,#2a1a3a), var(--c2,#0b0b0d));position:relative;}
+  .single-cover::after{content:"45";position:absolute;top:.4rem;right:.5rem;font-family:var(--mono);font-size:.6rem;color:rgba(237,232,222,.5);}
+  .single h3{font-family:var(--display);font-weight:700;font-size:1.05rem;line-height:1.2;margin-bottom:.4rem;}
+  .single p{font-family:var(--mono);font-size:.7rem;color:var(--chrome);line-height:1.5;}
+
+  /* ---------- AIRPLAY (media appearances) ---------- */
+  .airplay{padding:6rem clamp(1.2rem,6vw,4rem);background:var(--graphite);border-top:1px solid rgba(154,160,168,.15);}
+  .nowplaying{
+    display:flex;align-items:center;gap:1.1rem;margin-bottom:2.4rem;
+    border:1px solid rgba(154,160,168,.25);padding:1rem 1.3rem;background:var(--void);
+    font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;color:var(--bone-dim);
+  }
+  .nowplaying b{color:var(--crimson-bright);font-weight:500;letter-spacing:.18em;font-size:.68rem;}
+  .nowplaying .np-title{color:var(--bone);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .eq{display:flex;gap:3px;align-items:flex-end;height:18px;flex:0 0 auto;}
+  .eq span{width:3px;background:var(--crimson-bright);height:30%;animation:eq 1s ease-in-out infinite;}
+  .eq span:nth-child(2){animation-delay:.25s;}
+  .eq span:nth-child(3){animation-delay:.5s;}
+  .eq span:nth-child(4){animation-delay:.12s;}
+  @keyframes eq{0%,100%{height:20%;}50%{height:100%;}}
+
+  .playlist{list-style:none;border-top:1px solid rgba(154,160,168,.2);}
+  .track{
+    display:grid;grid-template-columns:2.6rem 1fr auto 2.4rem;align-items:center;gap:1rem;
+    padding:1.15rem .6rem;border-bottom:1px solid rgba(154,160,168,.15);
+    transition:background .3s var(--ease);
+  }
+  .track:hover{background:rgba(168,25,46,.12);}
+  .track .num{font-family:var(--mono);font-size:.78rem;color:var(--chrome);}
+  .track .t-title{font-family:var(--display);font-weight:700;font-size:1.25rem;line-height:1.2;}
+  .track .t-meta{font-family:var(--mono);font-size:.7rem;color:var(--chrome);letter-spacing:.06em;text-transform:uppercase;margin-top:.35rem;}
+  .track .t-date{font-family:var(--mono);font-size:.74rem;color:var(--bone-dim);}
+  .track .play{
+    width:34px;height:34px;border-radius:50%;border:1px solid rgba(154,160,168,.4);
+    display:flex;align-items:center;justify-content:center;transition:background .3s var(--ease), border-color .3s var(--ease);
+  }
+  .track .play::before{content:"";margin-left:2px;border-left:9px solid var(--bone);border-top:6px solid transparent;border-bottom:6px solid transparent;}
+  .track:hover .play{background:var(--crimson-bright);border-color:var(--crimson-bright);}
+  @media (max-width:600px){
+    .track{grid-template-columns:2rem 1fr 2.4rem;}
+    .track .t-date{display:none;}
+    .track .t-title{font-size:1.08rem;}
+  }
+
+  /* ---------- BACK COVER / CONTACT ---------- */
+  .backcover{padding:7rem clamp(1.2rem,6vw,4rem);background:var(--crimson);color:var(--bone);}
+  .backcover-inner{max-width:44rem;margin:0 auto;text-align:center;}
+  .backcover .eyebrow{color:rgba(237,232,222,.75);}
+  .backcover h2{font-family:var(--display);font-weight:900;font-size:clamp(2.2rem,6vw,4.2rem);line-height:1;margin:1rem 0 2.4rem;}
+  .credits{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.6rem 2rem;text-align:left;margin-bottom:2.6rem;
+    border-top:1px solid rgba(237,232,222,.3);border-bottom:1px solid rgba(237,232,222,.3);padding:2rem 0;}
+  .credits div span{display:block;font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(237,232,222,.65);margin-bottom:.3rem;}
+  .credits div strong{font-family:var(--body);font-weight:500;font-size:.95rem;}
+  .contact-links{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem 2.2rem;}
+  .contact-links a{font-family:var(--mono);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;border-bottom:1px solid rgba(237,232,222,.4);padding-bottom:.3rem;transition:border-color .3s var(--ease), opacity .3s var(--ease);}
+  .contact-links a:hover{border-color:var(--bone);opacity:.85;}
+
+  footer{padding:2rem clamp(1.2rem,6vw,4rem);display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-family:var(--mono);font-size:.68rem;color:var(--chrome);letter-spacing:.06em;background:var(--void);}
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;scroll-behavior:auto !important;animation:none !important;}
+    .lp{opacity:1;transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#top" class="wordmark"><span class="disc"></span>BRIANA</a>
+  <div class="nav-links" id="navLinks">
+    <a href="#about">Liner Notes</a>
+    <a href="#airplay">Airplay</a>
+    <a href="#discography">Discography</a>
+    <a href="#singles">Singles</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-text">
+    <div class="hero-eyebrow eyebrow">Now spinning</div>
+    <h1 class="hero-title">The <em>full</em><br>discography</h1>
+    <p class="hero-sub">Every project and every commitment, pressed to record and filed by catalog number. Robotics, diplomacy, and writing — laid out A-side to B-side.</p>
+    <div class="hero-tags">
+      <span>Robotics</span><span>Diplomacy</span><span>Writing</span><span>Galați, RO</span><span>Class of 2027</span>
+    </div>
+  </div>
+  <div class="turntable">
+    <div class="platter">
+      <div class="label"><span>SIDE A</span><strong>BRIANA</strong><span>33⅓ RPM</span></div>
+      <div class="spindle"></div>
+    </div>
+    <div class="tonearm"></div>
+  </div>
+  <div class="scroll-cue">SCROLL</div>
+</header>
+
+<section class="statement" id="about">
+  <div class="statement-inner">
+    <div class="eyebrow">Liner notes</div>
+    <p>I build things that are meant to be used by someone other than me — a robot a team can compete with, a committee a delegate can be heard in, a workshop a twelve-year-old can walk away from grinning.</p>
+    <p>Every record below is a real project, filed with its own catalog number and tracklist. Hover a sleeve to see the vinyl come out, or scroll straight to the crate of singles for the smaller work.</p>
+  </div>
+</section>
+
+<section class="airplay" id="airplay">
+  <div class="section-head">
+    <div class="eyebrow">On the radio</div>
+    <h2>Airplay</h2>
+  </div>
+  <div class="nowplaying" id="nowPlaying" aria-live="polite">
+    <div class="eq" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+    <b>NOW PLAYING</b>
+    <span class="np-title" id="npTitle"></span>
+  </div>
+  <div class="playlist" id="playlist"></div>
+</section>
+
+<section class="discog" id="discography">
+  <div class="section-head">
+    <div class="eyebrow">The LPs</div>
+    <h2>Discography</h2>
+  </div>
+  <div class="lp-grid">
+
+    <article class="lp" style="--c1:#3a1218;--c2:#0b0b0d;">
+      <div class="lp-top">
+        <div class="cover" data-cat="AR-001">
+          <div class="vinyl-peek"></div>
+        </div>
+        <div class="lp-info">
+          <div class="plate-no">CAT. AR-001</div>
+          <h3 class="lp-title">Seramitae</h3>
+          <div class="lp-role">FIRST Tech Challenge — Team Member</div>
+        </div>
+      </div>
+      <p class="lp-desc">A competitive robotics team built around the idea that the build season is only half the work — the other half is making sure robotics reaches kids who'd never otherwise touch a controller.</p>
+      <div class="tracklist">
+        <div class="side">
+          <div class="side-label">SIDE A</div>
+          <ol>
+            <li><b>A1</b> 4,000+ youth reached</li>
+            <li><b>A2</b> Think Award placements</li>
+          </ol>
+        </div>
+        <div class="side">
+          <div class="side-label">SIDE B</div>
+          <ol>
+            <li><b>B1</b> Chicago Robotics Invitational qualifier</li>
+            <li><b>B2</b> Canada Cup qualifier</li>
+          </ol>
+        </div>
+      </div>
+    </article>
+
+    <article class="lp" style="--c1:#1a2a3a;--c2:#0b0b0d;">
+      <div class="lp-top">
+        <div class="cover" data-cat="AR-002">
+          <div class="vinyl-peek"></div>
+        </div>
+        <div class="lp-info">
+          <div class="plate-no">CAT. AR-002</div>
+          <h3 class="lp-title">Access &amp; Outreach</h3>
+          <div class="lp-role">Smiles &amp; Robots · Robotica la Pachet</div>
+        </div>
+      </div>
+      <p class="lp-desc">Two programs on the same premise: STEM shouldn't require the right school or neighborhood. Smiles &amp; Robots runs inclusion-focused sessions with Asociația Fantasticii Down; Robotica la Pachet packages that into a two-day workshop for middle schoolers.</p>
+      <div class="tracklist">
+        <div class="side">
+          <div class="side-label">SIDE A</div>
+          <ol>
+            <li><b>A1</b> Inclusion-focused programming</li>
+            <li><b>A2</b> Partnered with a local NGO</li>
+          </ol>
+        </div>
+        <div class="side">
+          <div class="side-label">SIDE B</div>
+          <ol>
+            <li><b>B1</b> Two-day workshop format</li>
+            <li><b>B2</b> Run through Seramitae</li>
+          </ol>
+        </div>
+      </div>
+    </article>
+
+    <article class="lp" style="--c1:#2a1a3a;--c2:#0b0b0d;">
+      <div class="lp-top">
+        <div class="cover" data-cat="AR-003">
+          <div class="vinyl-peek"></div>
+        </div>
+        <div class="lp-info">
+          <div class="plate-no">CAT. AR-003</div>
+          <h3 class="lp-title">SOCHUM</h3>
+          <div class="lp-role">Model United Nations — Committee Chair</div>
+        </div>
+      </div>
+      <p class="lp-desc">Chairing the Social, Humanitarian &amp; Cultural committee at an upcoming conference — setting the agenda, keeping debate moving, and making sure first-time delegates still get heard.</p>
+      <div class="tracklist">
+        <div class="side">
+          <div class="side-label">SIDE A</div>
+          <ol>
+            <li><b>A1</b> Committee: SOCHUM</li>
+          </ol>
+        </div>
+        <div class="side">
+          <div class="side-label">SIDE B</div>
+          <ol>
+            <li><b>B1</b> Role: Chair</li>
+          </ol>
+        </div>
+      </div>
+    </article>
+
+    <article class="lp" style="--c1:#1a3a2a;--c2:#0b0b0d;">
+      <div class="lp-top">
+        <div class="cover" data-cat="AR-004">
+          <div class="vinyl-peek"></div>
+        </div>
+        <div class="lp-info">
+          <div class="plate-no">CAT. AR-004</div>
+          <h3 class="lp-title">Where the Models Break</h3>
+          <div class="lp-role">Harvard AI Bootcamp</div>
+        </div>
+      </div>
+      <p class="lp-desc">A closer look at how AI systems fail and succeed: red-teaming GPT-3.5 and GPT-4 to probe for weaknesses, then building a CNN vs. ResNet18 comparison for breast cancer detection.</p>
+      <div class="tracklist">
+        <div class="side">
+          <div class="side-label">SIDE A</div>
+          <ol>
+            <li><b>A1</b> Red-teaming GPT-3.5 / GPT-4</li>
+          </ol>
+        </div>
+        <div class="side">
+          <div class="side-label">SIDE B</div>
+          <ol>
+            <li><b>B1</b> CNN vs. ResNet18, medical imaging</li>
+          </ol>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section class="singles" id="singles">
+  <div class="section-head" style="padding:0 clamp(1.2rem,6vw,4rem);">
+    <div class="eyebrow">The 7-inches</div>
+    <h2>Singles &amp; B-sides</h2>
+  </div>
+  <div class="rail">
+    <div class="single" style="--c1:#3a2a1a;--c2:#0b0b0d;">
+      <div class="single-cover"></div>
+      <h3>Student Council, CJE Galați</h3>
+      <p>Executive board seat — governance and procedural work.</p>
+    </div>
+    <div class="single" style="--c1:#1a3a3a;--c2:#0b0b0d;">
+      <div class="single-cover"></div>
+      <h3>On the Page</h3>
+      <p>Romanian prose &amp; English poetry, alongside close study of Petrescu and Călinescu.</p>
+    </div>
+    <div class="single" style="--c1:#3a1a2a;--c2:#0b0b0d;">
+      <div class="single-cover"></div>
+      <h3>On Air</h3>
+      <p>A podcast project with a thread running to Eurovision 2026.</p>
+    </div>
+    <div class="single" style="--c1:#2a2a1a;--c2:#0b0b0d;">
+      <div class="single-cover"></div>
+      <h3>“Magic Time” Excellence in Education Gala</h3>
+      <p>1 of 8 volunteers selected for a large-scale scholarship fundraiser.</p>
+    </div>
+  </div>
+</section>
+
+
+<section class="backcover" id="contact">
+  <div class="backcover-inner">
+    <div class="eyebrow">Back cover</div>
+    <h2>Book me.</h2>
+    <div class="credits">
+      <div><span>Based in</span><strong>Galați, Romania</strong></div>
+      <div><span>Status</span><strong>Class of 2027</strong></div>
+      <div><span>Genres</span><strong>Robotics, Diplomacy, Writing</strong></div>
+      <div><span>Label</span><strong>Archive Records</strong></div>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:beftinca@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/briana-eftinca-ba697036a/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://instagram.com/24briaa" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Briana — Archive Records</span>
+  <span>Pressed August 2026</span>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(en => { if (en.isIntersecting) en.target.classList.add('in-view'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.lp').forEach(el => io.observe(el));
+
+  // tap-to-reveal vinyl on touch devices
+  document.querySelectorAll('.lp').forEach(lp => {
+    lp.addEventListener('click', () => lp.classList.toggle('tapped'));
+  });
+
+  // ---------- AIRPLAY: edit this list with your real media appearances ----------
+  // Each entry = one "track". Fields: title, outlet, type, date, url.
+  // The first entry also shows in the "Now playing" bar. Add or reorder freely.
+  const airplay = [
+    { title: "Ten Olympiad Students from Galați Became “Ambassadors of Excellence” and Inspired Over 1,000 Peers", outlet: "Monitorul de Galați", type: "Article", date: "Nov 2026", url: "https://www.monitoruldegalati.ro/comunitate/zece-elevi-olimpici-din-galati-au-devenit-ambasadori-ai-excelentei-si-au-inspirat-peste-1-000-de-colegi.html" },
+    { title: "Radio Friends: Briana Eftinca, the Only Student in Galați with a Perfect 10 Average Every School Year for Six Years", outlet: "Radio România Actualități", type: "Radio", date: "Aug 2026", url: "https://www.facebook.com/romaniaactualitati/posts/prieteniidelaradiobriana-eftinca-are-18-ani-%C5%9Fi-este-singura-elev%C4%83-din-municipiul/1752483446883144/" },
+    { title: "Three Galați Robotics Teams Qualify for Nationals", outlet: "Viața Liberă", type: "Article", date: "Feb 2026", url: "https://www.viata-libera.ro/prima-pagina/256636-trei-echipe-de-robotica-din-galati%2C-calificate-la-nationale" },
+    { title: "DynaByte Robotics Team of CNVA Galați Scores a Double Success in FTC Season 10 DECODE", outlet: "Monitorul de Galați", type: "Article", date: "Jan 2026", url: "https://www.monitoruldegalati.ro/comunitate/echipa-de-robotica-dynabyte-a-cnva-galati-dubla-reusita-in-sezonul-10-ftc-decode.html" },
+    { title: "Four Galați Teams Qualify for a National Robotics Competition", outlet: "Viața Liberă", type: "Article", date: "Jan 2025", url: "https://www.viata-libera.ro/educatie/238495-patru-echipe-galatene-calificate-la-un-concurs-national-de-robotica" },
+    { title: "Galați’s Straight-10 Students Honored at the Local Council Meeting", outlet: "Monitorul de Galați", type: "Article", date: "Nov 2023", url: "https://www.monitoruldegalati.ro/stirea-zilei/foto-elevii-de-10-ai-galatiului-premiati-in-sedinta-consiliului-local.html" },
+    { title: "Students with a 10 Average on the National Exams Celebrated at the Galați County School Inspectorate", outlet: "Galați County School Inspectorate · Facebook", type: "Post", date: "Sep 2023", url: "https://www.facebook.com/share/p/19LS5DRxbH/" },
+    { title: "Costache Negri National College Team Awarded at a National Robotics Competition", outlet: "Viața Liberă", type: "Article", date: "Jul 2023", url: "https://www.viata-libera.ro/prima-pagina/206960-echipa-colegiului-costache-negri-premiata-la-un-concurs-national-de-robotica" },
+    { title: "Winners of the “Mathgal” Mathematics Competition", outlet: "Viața Liberă", type: "Article", date: "May 2023", url: "https://www.viata-libera.ro/educatie/203700-premiantii-concursului-de-matematica-mathgal" },
+    { title: "Briana Maria Eftincă Wins First Prize and Qualifies for the National Stage of the Romanian Language and Literature Olympiad", outlet: "Galați County Center of Excellence · Facebook", type: "Post", date: "Mar 2022", url: "https://www.facebook.com/share/p/19ZxSLdU8F/" }
+  ];
+
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  document.getElementById('npTitle').textContent = airplay[0].title + ' — ' + airplay[0].outlet;
+  document.getElementById('playlist').innerHTML = '<ol style="list-style:none">' + airplay.map((a, i) => `
+    <li><a class="track" href="${esc(a.url)}" target="_blank" rel="noopener" aria-label="Open: ${esc(a.title)}">
+      <span class="num">${String(i + 1).padStart(2, '0')}</span>
+      <span>
+        <div class="t-title">${esc(a.title)}</div>
+        <div class="t-meta">${esc(a.outlet)} · ${esc(a.type)} · RO</div>
+      </span>
+      <span class="t-date">${esc(a.date)}</span>
+      <span class="play" aria-hidden="true"></span>
+    </a></li>`).join('') + '</ol>';
+
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+</script>
+
+</body>
+</html>
